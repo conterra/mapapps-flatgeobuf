@@ -1,0 +1,20 @@
+{
+    "name": "flatgeobuf-geojson",
+    "version": "3.21.3",
+    "description": "flatgeobuf geojson module",
+    "main": "geojson.min.js",
+    "i18n": [],
+    "dependencies": {},
+    "keywords": [
+        "flatgeobuf",
+        "geojson"
+    ],
+    "license": "BSD 2-Clause 'Simplified' License",
+    "authors": [
+        "Björn Harrtell"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/flatgeobuf/flatgeobuf.git"
+    }
+}

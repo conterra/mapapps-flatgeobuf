@@ -1,0 +1,20 @@
+{
+    "name": "flatgeobuf-ol",
+    "version": "3.21.3",
+    "description": "flatgeobuf ol module",
+    "main": "ol.min.js",
+    "i18n": [],
+    "dependencies": {},
+    "keywords": [
+        "flatgeobuf",
+        "ol"
+    ],
+    "license": "BSD 2-Clause 'Simplified' License",
+    "authors": [
+        "Björn Harrtell"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/flatgeobuf/flatgeobuf.git"
+    }
+}

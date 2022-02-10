@@ -1,0 +1,20 @@
+{
+    "name": "flatgeobuf-generic",
+    "version": "3.21.3",
+    "description": "flatgeobuf generic module",
+    "main": "generic.min.js",
+    "i18n": [],
+    "dependencies": {},
+    "keywords": [
+        "flatgeobuf",
+        "generic"
+    ],
+    "license": "BSD 2-Clause 'Simplified' License",
+    "authors": [
+        "Björn Harrtell"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/flatgeobuf/flatgeobuf.git"
+    }
+}
