@@ -14,32 +14,38 @@
  * limitations under the License.
  */
 import {geojson} from "flatgeobuf";
-import GeoJSONLayer from "esri/layers/GeoJSONLayer";
+import FeatureLayer from "esri/layers/FeatureLayer";
 
 export default class FlatgeobufLayerTypeFactory {
 
-     async create(layerArguments) {
-        let featureArray = [];
+    async create(layerArguments) {
+        const graphics = [];
 
-        const response = await fetch(layerArguments.url)
-        for await (let feature of geojson.deserialize(response.body)) {
-            featureArray.push(feature)
+        const response = await fetch(layerArguments.url);
+        for await (const feature of geojson.deserialize(response.body)) {
+            const geometry = this._transformer.geojsonToGeometry(feature.geometry);
+            const graphic = {
+                geometry: geometry,
+                attributes: feature.properties
+            };
+            graphics.push(graphic);
         }
 
-        const featureGeoJSON = {
-            type: "FeatureCollection",
-            features: featureArray
-        };
+        const properties = Object.assign({}, layerArguments, {source: graphics, url: null});
+        const layer = new FeatureLayer(properties);
 
-        const featureGeoJSONBlob = new Blob([JSON.stringify(featureGeoJSON)], {
-            type: "application/json"
-        });
-
-        const url = URL.createObjectURL(featureGeoJSONBlob);
-        const properties = Object.assign({}, layerArguments, {url: url})
-
-         //TODO: wenn extent nicht gegeben, hier berechnen
-        const layer = new GeoJSONLayer(properties);
+        // calculate extent
+        if (!layer.extent) {
+            let extent = null;
+            layer.source.toArray().forEach((g) => {
+                if (!extent) {
+                    extent = g.geometry.extent;
+                } else {
+                    extent.union(g.geometry.extent);
+                }
+            });
+            layer.extent = extent;
+        }
 
         return {instance: layer};
     }
