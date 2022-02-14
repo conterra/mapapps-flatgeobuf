@@ -1,0 +1,35 @@
+{
+    "name": "dn_flatgeobuf",
+    "version": "4.12.3",
+    "title": "${bundleName}",
+    "description": "${bundleDescription}",
+    "vendor": "con terra GmbH",
+    "productName": "devnet-mapapps-flatgeobuf",
+    "i18n": [
+        "bundle"
+    ],
+    "startLevel": 1,
+    "dependencies": {
+        "flatgeobuf": "^3.21.3"
+    },
+    "components": [
+        {
+            "name": "FlatgeobufLayerTypeFactory",
+            "immediate": true,
+            "provides": [
+                "map-config-api.LayerTypeFactory",
+                "dn_flatgeobuf.FlatgeobufLayerTypeFactory"
+            ],
+            "properties": {
+                "layerType": "FLATGEOBUF"
+            },
+            "references": [
+//                {
+//                    "name": "mapWidgetModel",
+//                    "providing": "map-widget.MapWidgetModel",
+//                    "cardinality": "0..1"
+//                }
+            ]
+        }
+    ]
+}
