@@ -24,7 +24,7 @@
             "search-ui",
             "locator-store",
             "toc",
-            "sample_helloworld"
+            "dn_flatgeobuf"
         ]
     },
     "bundles": {
@@ -55,7 +55,14 @@
                     }
                 ],
                 "map": {
-                    "layers": []
+                    "layers": [
+                        {
+                            "id": "flatgeobuf",
+                            "type": "FLATGEOBUF",
+                            "url": "https://flatgeobuf.org/test/data/UScounties.fgb",
+                            "title": "Counties"
+                        }
+                    ]
                 },
                 "view": {
                     "viewmode": "2D",

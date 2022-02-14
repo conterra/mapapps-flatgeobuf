@@ -1,4 +1,4 @@
-# mapapps-remote-project-blueprint
+ mapapps-remote-project-blueprint
 
 This project is a blueprint for starting a con terra developer network bundle
 
