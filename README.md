@@ -9,7 +9,7 @@ More information: https://github.com/flatgeobuf/flatgeobuf
 https://demos.conterra.de/mapapps/resources/apps/downloads_flatgeobuf/index.html
 
 ## Installation Guide
-⚠️**Requirement: map.apps 4.12.0**
+⚠️**Requirement: map.apps 4.11.0**
 
 [dn_flatgeobuf Documentation](https://github.com/conterra/mapapps-flategobuf/tree/master/src/main/js/bundles/dn_flatgeobuf)
 
