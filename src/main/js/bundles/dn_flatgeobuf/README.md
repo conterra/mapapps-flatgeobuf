@@ -1,6 +1,7 @@
 # dn_flatgeobuf
 
 This bundle adds the support for FlatGeobuf layers to map.apps. It uses the library provided by FlatGeobuf.
+More information: https://github.com/flatgeobuf/flatgeobuf
 
 ## Minimal Config
 To load a FlatGeobuf as layer the following parameters are required. `id` and `title` can be left out but are strongly recommended.
