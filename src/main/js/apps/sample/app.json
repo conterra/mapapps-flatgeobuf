@@ -81,7 +81,7 @@
                             "labelsVisible": true,
                             "labelingInfo": {
                                 "labelExpressionInfo": {
-                                    "expression": "$feature.FIPS"
+                                    "expression": "$feature.NAME"
                                 },
                                 "symbol": {
                                     "type": "text",
