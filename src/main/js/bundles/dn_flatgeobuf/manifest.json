@@ -16,11 +16,11 @@
     },
     "components": [
         {
-            "name": "FlatgeobufLayerTypeFactory",
+            "name": "FlatGeobufLayerTypeFactory",
             "immediate": true,
             "provides": [
                 "map-config-api.LayerTypeFactory",
-                "dn_flatgeobuf.FlatgeobufLayerTypeFactory"
+                "dn_flatgeobuf.FlatGeobufLayerTypeFactory"
             ],
             "properties": {
                 "layerType": "FLATGEOBUF"

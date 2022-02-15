@@ -16,7 +16,7 @@
 import {geojson} from "flatgeobuf";
 import FeatureLayer from "esri/layers/FeatureLayer";
 
-export default class FlatgeobufLayerTypeFactory {
+export default class FlatGeobufLayerTypeFactory {
 
     async create(layerArguments) {
         const graphics = [];

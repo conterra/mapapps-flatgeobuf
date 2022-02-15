@@ -14,5 +14,5 @@
  * limitations under the License.
  */
 import ".";
-import "./FlatgeobufLayerTypeFactory";
+import "./FlatGeobufLayerTypeFactory";
 import "ct/tools/Tool";
