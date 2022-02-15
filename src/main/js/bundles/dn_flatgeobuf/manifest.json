@@ -11,7 +11,8 @@
     "startLevel": 1,
     "dependencies": {
         "flatgeobuf": "^3.21.3",
-        "geojson": "^4.12.0"
+        "map-config-api": "^4.11.0",
+        "geojson": "^4.11.0"
     },
     "components": [
         {
