@@ -15,4 +15,3 @@
  */
 import ".";
 import "./FlatGeobufLayerTypeFactory";
-import "ct/tools/Tool";
