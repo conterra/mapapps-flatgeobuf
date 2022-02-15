@@ -64,64 +64,49 @@
                             "title": "Counties",
                             "objectIdField": "FIPS",
                             "displayField": "NAME",
-                            //                            "effect": [
-                            //                                {
-                            //                                    "scale": 36978595,
-                            //                                    "value": "drop-shadow(3px, 3px, 4px)"
-                            //                                },
-                            //                                {
-                            //                                    "scale": 18489297,
-                            //                                    "value": "drop-shadow(2px, 2px, 3px)"
-                            //                                },
-                            //                                {
-                            //                                    "scale": 4622324,
-                            //                                    "valuevalue": "drop-shadow(1px, 1px, 2px)"
-                            //                                }
-                            //                            ],
-                            //                            "featureReduction": {
-                            //                                "type": "cluster",
-                            //                                "clusterRadius": 100
-                            //                            },
-                            //                            "labelInfo": {
-                            //                                "labelExpressionInfo": {
-                            //                                    "expression": "$feature.FIPS"
-                            //                                },
-                            //                                "symbol": {
-                            //                                    "type": "text",
-                            //                                    "color": "black",
-                            //                                    "haloSize": 1,
-                            //                                    "haloColor": "white"
-                            //                                }
-                            //                            },
-                            //                            "opacity": 0.5,
-                            //                            "renderer": {
-                            //                                "type": "simple",
-                            //                                "symbol": {
-                            //                                    "type": "simple-marker",
-                            //                                    "size": 6,
-                            //                                    "color": "black",
-                            //                                    "outline": {
-                            //                                        "width": 0.5,
-                            //                                        "color": "white"
-                            //                                    }
-                            //                                }
-                            //                            },
-//                            "renderer": {
-//                                "type": "unique-value",
-//                                "field": "STATE",
-//                                "defaultSymbol": {
-//                                    "type": "simple-fill"
-//                                },
-//                                "uniqueValueInfos": [
-//                                    {
-//                                        "value": "TX",
-//                                        "symbol": {
-//                                            "type": "simple-fill",
-//                                            "color": "blue"
-//                                        }
-//                                    }
-//                                ]
-//                            },
+                            "effect": [
+                                {
+                                    "scale": 36978595,
+                                    "value": "drop-shadow(3px, 3px, 4px)"
+                                },
+                                {
+                                    "scale": 18489297,
+                                    "value": "drop-shadow(2px, 2px, 3px)"
+                                },
+                                {
+                                    "scale": 4622324,
+                                    "value": "drop-shadow(1px, 1px, 2px)"
+                                }
+                            ],
+                            "labelsVisible": true,
+                            "labelingInfo": {
+                                "labelExpressionInfo": {
+                                    "expression": "$feature.FIPS"
+                                },
+                                "symbol": {
+                                    "type": "text",
+                                    "color": "black",
+                                    "haloSize": 1,
+                                    "haloColor": "white"
+                                }
+                            },
+                            "opacity": 0.5,
+                            "renderer": {
+                                "type": "unique-value",
+                                "field": "STATE",
+                                "defaultSymbol": {
+                                    "type": "simple-fill"
+                                },
+                                "uniqueValueInfos": [
+                                    {
+                                        "value": "TX",
+                                        "symbol": {
+                                            "type": "simple-fill",
+                                            "color": "blue"
+                                        }
+                                    }
+                                ]
+                            },
                             "fields": [
                                 {
                                     "name": "FIPS",
@@ -144,7 +129,6 @@
                                     "type": "string"
                                 }
                             ],
-                            //"definitionExpression": "STATE = 'ME'",
                             "popupTemplate": {
                                 "title": "County: {NAME}",
                                 "content": [
