@@ -62,6 +62,7 @@
                             "type": "FLATGEOBUF",
                             "url": "https://flatgeobuf.org/test/data/UScounties.fgb",
                             "title": "Counties",
+                            "objectIdField": "FIPS",
                             "displayField": "NAME",
                             "fields": [
                                 {
@@ -85,6 +86,7 @@
                                     "type": "string"
                                 }
                             ],
+                            //"definitionExpression": "STATE = 'ME'",
                             "popupTemplate": {
                                 "title": "County: {NAME}",
                                 "content": [
