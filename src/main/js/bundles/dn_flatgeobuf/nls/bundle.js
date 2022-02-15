@@ -15,9 +15,8 @@
  */
 module.exports = {
     root: {
-        bundleName: "Hello World",
-        bundleDescription: "This bundle prints Hello.",
-        hello: "Hello World"
+        bundleName: "FlatGeobuf",
+        bundleDescription: ""
     },
     de: true
 };

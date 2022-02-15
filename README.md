@@ -1,5 +1,5 @@
 # Flatgeobuf
-This bundle adds the support for flatgeobuf layers to map.apps. It uses the library provided by flatgeobuf.
+This bundle adds the support for FlatGeobuf layers to map.apps. It uses the library provided by FlatGeobuf.
 More information: https://github.com/flatgeobuf/flatgeobuf
 
 ## Build Status

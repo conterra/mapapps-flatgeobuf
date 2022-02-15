@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 module.exports = {
-    bundleName: "Hallo Welt",
-    bundleDescription: "Das Modul gibt Hallo aus.",
-    hello: "Hallo Welt"
+    bundleName: "Flatgeobuf",
+    bundleDescription: "Dieses Bundle fügt map.apps die Unterstützung für FlatGeobuf-Layer hinzu. Dafür verwendet es die von FlatGeobuf bereitgestellte Bibliothek."
 };

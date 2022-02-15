@@ -1,3 +1,3 @@
-# sample_helloworld
+# dn_flatgeobuf
 
-This bundle is a blueprint for starting a con terra developer network bundle.
+This bundle adds the support for FlatGeobuf layers to map.apps. It uses the library provided by FlatGeobuf.
