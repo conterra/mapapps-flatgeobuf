@@ -16,7 +16,11 @@
 module.exports = {
     root: {
         bundleName: "FlatGeobuf",
-        bundleDescription: "This bundle adds the support for FlatGeobuf layers to map.apps. It uses the library provided by FlatGeobuf."
+        bundleDescription: "This bundle adds the support for FlatGeobuf layers to map.apps. It uses the library provided by FlatGeobuf.",
+        ui:{
+            exportActionTitle: "Export to FlatGeobuf",
+            startMessage: "Export started"
+        }
     },
     de: true
 };

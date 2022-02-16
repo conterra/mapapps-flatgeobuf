@@ -15,3 +15,4 @@
  */
 import ".";
 import "./FlatGeobufLayerTypeFactory";
+import "./ExportFlatGeobufActionDefinitionFactory";

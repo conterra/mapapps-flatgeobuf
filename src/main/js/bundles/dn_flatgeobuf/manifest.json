@@ -12,7 +12,8 @@
     "dependencies": {
         "flatgeobuf": "^3.21.3",
         "map-config-api": "^4.11.0",
-        "geojson": "^4.11.0"
+        "geojson": "^4.11.0",
+        "toc": "^4.7.0"
     },
     "components": [
         {
@@ -27,8 +28,26 @@
             },
             "references": [
                 {
-                    "name" : "_transformer",
-                    "providing":"geojson.Transformer"
+                    "name": "_transformer",
+                    "providing": "geojson.Transformer"
+                },
+                {
+                    "name": "_exportAction",
+                    "providing": "toc.ActionDefinitionFactory"
+                }
+            ]
+        },
+        {
+            "name": "ExportFlatGeobufActionDefinitionFactory",
+            "provides": "toc.ActionDefinitionFactory",
+            "references": [
+                {
+                    "name": "_transformer",
+                    "providing": "geojson.Transformer"
+                },
+                {
+                    "name": "_logService",
+                    "providing": "ct.framework.api.LogService"
                 }
             ]
         }
