@@ -13,7 +13,7 @@
         "flatgeobuf": "^3.21.3",
         "map-config-api": "^4.11.0",
         "geojson": "^4.11.0",
-        "toc": "^4.7.0"
+        "toc": "^4.11.0"
     },
     "components": [
         {
