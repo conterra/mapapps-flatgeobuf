@@ -16,14 +16,75 @@
 
 import * as flatgeobuf from "flatgeobuf";
 
+/**
+ * Method to query all features from FeatureLayer.
+ *
+ * @param layer
+ * @returns {*}
+ */
+const queryAllFeaturesFromLayer = (layer) => {
+    const query = {
+        where: "1=1",
+        returnGeometry: true,
+        outFields: ["*"]
+    };
+    return layer.queryFeatures(query).then((result) => result.features);
+};
+
+/**
+ * Method to convert Esri Features to GeoJSON.
+ *
+ * @param features
+ * @param transformer
+ * @returns {{features: *, type: string}}
+ */
+const getGeoJSONFeatureCollection = (features, transformer) => {
+    const geoJSONFeatures = features.map(feature => {
+        const geometry = transformer.geometryToGeojson(feature.geometry);
+        return {
+            "type": "Feature",
+            "geometry": geometry
+        };
+    });
+    return {
+        "type": "FeatureCollection",
+        "features": geoJSONFeatures
+    };
+};
+
+/**
+ * Method to save FlatGeobuf-File.
+ *
+ * @param flatGeobufBinary
+ * @param title
+ */
+const saveAsFGB = (flatGeobufBinary, title) => {
+    const blob = new Blob([flatGeobufBinary], {type: "application/octet-stream"});
+    const url = window.URL.createObjectURL(blob);
+    const flatGeobufURL = document.createElement("a");
+    flatGeobufURL.setAttribute("href", url);
+    const fileName = (title + ".fgb");
+    flatGeobufURL.setAttribute("download", fileName);
+    flatGeobufURL.style.display = "none";
+    document.body.appendChild(flatGeobufURL);
+    flatGeobufURL.click();
+    document.body.removeChild(flatGeobufURL);
+};
+
+const getFlatGeobufBinary = (geoJSONFeatureCollection, geojson) => geojson.serialize(geoJSONFeatureCollection);
+
 export default class ExportFlatGeobufActionDefinitionFactory {
 
     constructor() {
         this.supportedIds = ["export-flatgeobuf-action"];
     }
 
+
     createDefinitionById(id) {
         const i18n = this._i18n.get().ui;
+        const logService = this._logService;
+        const transformer = this._transformer;
+
 
         if (id !== "export-flatgeobuf-action") {
             return;
@@ -33,8 +94,6 @@ export default class ExportFlatGeobufActionDefinitionFactory {
             type: "button",
             label: i18n.exportActionTitle,
             icon: "icon-doc-export",
-            transformer: this._transformer,
-            logService: this._logService,
             startMessage: i18n.startMessage,
 
             isVisibleForItem(tocItem) {
@@ -43,56 +102,14 @@ export default class ExportFlatGeobufActionDefinitionFactory {
                 }
             },
 
-            trigger(tocItem) {
-                this.logService.info({
+            async trigger(tocItem) {
+                logService.info({
                     message: this.startMessage
                 });
-
-                // access layer and prepare query
-                const layer = tocItem.ref;
-                const query = {
-                    //return all features
-                    where: "1=1",
-                    returnGeometry: true,
-                    outFields: ["*"]
-                };
-
-                // query layer and push each feature into an array with added GeoJSON properties
-                const geoJSONArray = [];
-                layer.queryFeatures(query).then(results => {
-                    const features = results.features;
-                    features.forEach(feature => {
-                        const geometry = this.transformer.geometryToGeojson(feature.geometry);
-                        const geoJSON = {
-                            "type": "Feature",
-                            "geometry": geometry
-                        };
-                        geoJSONArray.push(geoJSON);
-                    });
-
-                    // create collection of all GeoJSON features
-                    const geoJSONFeatureCollection = {
-                        "type": "FeatureCollection",
-                        "features": geoJSONArray
-                    };
-
-                    // serialize GeoJSON features into FlatGeobuf Uint8Array
-                    const exportFlatGeobuf = flatgeobuf.geojson.serialize(geoJSONFeatureCollection);
-
-                    // create url for FlatGeobuf data
-                    const blob = new Blob(exportFlatGeobuf, {type: "octet/stream"});
-                    const url = window.URL.createObjectURL(blob);
-
-                    // download FlatGeobuf data as .fgb file
-                    const flatGeobufURL = document.createElement("a");
-                    flatGeobufURL.setAttribute("href", url);
-                    const fileName = (tocItem.ref.title + ".fgb");
-                    flatGeobufURL.setAttribute("download", fileName);
-                    flatGeobufURL.style.display = "none";
-                    document.body.appendChild(flatGeobufURL);
-                    flatGeobufURL.click();
-                    document.body.removeChild(flatGeobufURL);
-                });
+                const features = await queryAllFeaturesFromLayer(tocItem.ref);
+                const geoJSONFeatureCollection = getGeoJSONFeatureCollection(features, transformer);
+                const flatGeobufBinary = getFlatGeobufBinary(geoJSONFeatureCollection, flatgeobuf.geojson);
+                saveAsFGB(flatGeobufBinary, tocItem.ref?.title || tocItem.ref?.id);
             }
         };
     }
