@@ -53,7 +53,8 @@ export default class ExportFlatGeobufActionDefinitionFactory {
                 const query = {
                     //return all features
                     where: "1=1",
-                    returnGeometry: true
+                    returnGeometry: true,
+                    outFields: ["*"]
                 };
 
                 // query layer and push each feature into an array with added GeoJSON properties
