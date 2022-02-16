@@ -58,55 +58,32 @@
                 "map": {
                     "layers": [
                         {
+                            "id": "grenzen",
+                            "type": "FLATGEOBUF",
+                            "url": "resource('${app}:res/world.fgb')",
+                            "title": "Ländergrenzen",
+                            "objectIdField": "objectid",
+                            "displayField": "placename",
+                            "fields": [
+                                {
+                                    "name": "objectid",
+                                    "alias": "objectid",
+                                    "type": "oid"
+                                },
+                                {
+                                    "name": "placename",
+                                    "alias": "placename",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        {
                             "id": "flatgeobuf",
                             "type": "FLATGEOBUF",
                             "url": "https://flatgeobuf.org/test/data/UScounties.fgb",
                             "title": "Counties",
                             "objectIdField": "FIPS",
                             "displayField": "NAME",
-                            "effect": [
-                                {
-                                    "scale": 36978595,
-                                    "value": "drop-shadow(3px, 3px, 4px)"
-                                },
-                                {
-                                    "scale": 18489297,
-                                    "value": "drop-shadow(2px, 2px, 3px)"
-                                },
-                                {
-                                    "scale": 4622324,
-                                    "value": "drop-shadow(1px, 1px, 2px)"
-                                }
-                            ],
-                            "labelsVisible": true,
-                            "labelingInfo": {
-                                "labelExpressionInfo": {
-                                    "expression": "$feature.NAME"
-                                },
-                                "symbol": {
-                                    "type": "text",
-                                    "color": "black",
-                                    "haloSize": 1,
-                                    "haloColor": "white"
-                                }
-                            },
-                            "opacity": 0.5,
-                            "renderer": {
-                                "type": "unique-value",
-                                "field": "STATE",
-                                "defaultSymbol": {
-                                    "type": "simple-fill"
-                                },
-                                "uniqueValueInfos": [
-                                    {
-                                        "value": "TX",
-                                        "symbol": {
-                                            "type": "simple-fill",
-                                            "color": "blue"
-                                        }
-                                    }
-                                ]
-                            },
                             "fields": [
                                 {
                                     "name": "FIPS",
@@ -129,6 +106,23 @@
                                     "type": "string"
                                 }
                             ],
+                            "opacity": 0.5,
+                            "renderer": {
+                                "type": "unique-value",
+                                "field": "STATE",
+                                "defaultSymbol": {
+                                    "type": "simple-fill"
+                                },
+                                "uniqueValueInfos": [
+                                    {
+                                        "value": "TX",
+                                        "symbol": {
+                                            "type": "simple-fill",
+                                            "color": "blue"
+                                        }
+                                    }
+                                ]
+                            },
                             "popupTemplate": {
                                 "title": "County: {NAME}",
                                 "content": [
@@ -149,7 +143,33 @@
                             },
                             "maptipTemplate": {
                                 "title": "County: {NAME}"
-                            }
+                            },
+                            "labelsVisible": true,
+                            "labelingInfo": {
+                                "labelExpressionInfo": {
+                                    "expression": "$feature.NAME"
+                                },
+                                "symbol": {
+                                    "type": "text",
+                                    "color": "black",
+                                    "haloSize": 1,
+                                    "haloColor": "white"
+                                }
+                            },
+                            "effect": [
+                                {
+                                    "scale": 36978595,
+                                    "value": "drop-shadow(3px, 3px, 4px)"
+                                },
+                                {
+                                    "scale": 18489297,
+                                    "value": "drop-shadow(2px, 2px, 3px)"
+                                },
+                                {
+                                    "scale": 4622324,
+                                    "value": "drop-shadow(1px, 1px, 2px)"
+                                }
+                            ]
                         },
                         {
                             "id": "countries",
