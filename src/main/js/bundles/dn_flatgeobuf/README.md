@@ -1,10 +1,13 @@
 # dn_flatgeobuf
 
-This bundle adds the support for FlatGeobuf layers to map.apps. It uses the library provided by FlatGeobuf.
-More information: https://github.com/flatgeobuf/flatgeobuf
+This bundle adds the support for FlatGeobuf layers to map.apps. It uses the library provided by FlatGeobuf. More
+information: https://github.com/flatgeobuf/flatgeobuf
 
 ## Minimal Config
-To load a FlatGeobuf as layer the following parameters are required. `id` and `title` can be left out but are strongly recommended.
+
+To load a FlatGeobuf as layer the following parameters are required. `id` and `title` can be left out but are strongly
+recommended.
+
 ```json
 "map": {
     "layers": [
@@ -20,9 +23,12 @@ To load a FlatGeobuf as layer the following parameters are required. `id` and `t
 ```
 
 ## Extended Config
-This config extends the minimum config with optional optical effects, labels, transparency, a unique value renderer highlighting Texas, field information, popups and maptips.
+
+This config extends the minimum config with optional optical effects, labels, transparency, a unique value renderer
+highlighting Texas, field information, popups and maptips.
+
 ```json
- "map": {
+"map": {
     "layers": [
         {
             "id": "flatgeobuf",
@@ -31,49 +37,6 @@ This config extends the minimum config with optional optical effects, labels, tr
             "title": "Counties",
             "objectIdField": "FIPS",
             "displayField": "NAME",
-            "effect": [
-                {
-                    "scale": 36978595,
-                    "value": "drop-shadow(3px, 3px, 4px)"
-                },
-                {
-                    "scale": 18489297,
-                    "value": "drop-shadow(2px, 2px, 3px)"
-                },
-                {
-                    "scale": 4622324,
-                    "value": "drop-shadow(1px, 1px, 2px)"
-                }
-            ],
-            "labelsVisible": true,
-            "labelingInfo": {
-                "labelExpressionInfo": {
-                    "expression": "$feature.FIPS"
-                },
-                "symbol": {
-                    "type": "text",
-                    "color": "black",
-                    "haloSize": 1,
-                    "haloColor": "white"
-                }
-            },
-            "opacity": 0.5,
-            "renderer": {
-                "type": "unique-value",
-                "field": "STATE",
-                "defaultSymbol": {
-                    "type": "simple-fill"
-                },
-                "uniqueValueInfos": [
-                    {
-                        "value": "TX",
-                        "symbol": {
-                            "type": "simple-fill",
-                            "color": "blue"
-                        }
-                    }
-                ]
-            },
             "fields": [
                 {
                     "name": "FIPS",
@@ -96,6 +59,23 @@ This config extends the minimum config with optional optical effects, labels, tr
                     "type": "string"
                 }
             ],
+            "opacity": 0.5,
+            "renderer": {
+                "type": "unique-value",
+                "field": "STATE",
+                "defaultSymbol": {
+                    "type": "simple-fill"
+                },
+                "uniqueValueInfos": [
+                    {
+                        "value": "TX",
+                        "symbol": {
+                            "type": "simple-fill",
+                            "color": "blue"
+                        }
+                    }
+                ]
+            },
             "popupTemplate": {
                 "title": "County: {NAME}",
                 "content": [
@@ -116,7 +96,33 @@ This config extends the minimum config with optional optical effects, labels, tr
             },
             "maptipTemplate": {
                 "title": "County: {NAME}"
-            }
+            },
+            "labelsVisible": true,
+            "labelingInfo": {
+                "labelExpressionInfo": {
+                    "expression": "$feature.NAME"
+                },
+                "symbol": {
+                    "type": "text",
+                    "color": "black",
+                    "haloSize": 1,
+                    "haloColor": "white"
+                }
+            },
+            "effect": [
+                {
+                    "scale": 36978595,
+                    "value": "drop-shadow(3px, 3px, 4px)"
+                },
+                {
+                    "scale": 18489297,
+                    "value": "drop-shadow(2px, 2px, 3px)"
+                },
+                {
+                    "scale": 4622324,
+                    "value": "drop-shadow(1px, 1px, 2px)"
+                }
+            ]
         }
     ]
 }
@@ -145,4 +151,5 @@ This config extends the minimum config with optional optical effects, labels, tr
 | visible              | `Boolean`       | `true` or `false`                               | `true`  | Show/Hide layer                             |
 
 ## Known Limitations
+
 The limitations of the above properties stated in the [ArcGIS API for JavaScript documentation](https://developers.arcgis.com/javascript/latest/api-reference/esri-layers-FeatureLayer.html#properties-summary) apply.
