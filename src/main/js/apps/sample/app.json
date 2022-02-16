@@ -150,6 +150,12 @@
                             "maptipTemplate": {
                                 "title": "County: {NAME}"
                             }
+                        },
+                        {
+                            "id": "countries",
+                            "type": "AGS_FEATURE",
+                            "url": "https://services.conterra.de/arcgis/rest/services/common/grenzen/FeatureServer/3",
+                            "visible": false
                         }
                     ]
                 },
