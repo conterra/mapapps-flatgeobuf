@@ -16,6 +16,8 @@
 
 import * as flatgeobuf from "flatgeobuf";
 
+const ID = "export-flatgeobuf";
+
 /**
  * Method to query all features from FeatureLayer.
  *
@@ -82,7 +84,7 @@ const getFlatGeobufBinary = (geoJSONFeatureCollection, geojson) => geojson.seria
 export default class ExportFlatGeobufActionDefinitionFactory {
 
     constructor() {
-        this.supportedIds = ["export-flatgeobuf-action"];
+        this.supportedIds = [ID];
     }
 
 
@@ -93,11 +95,11 @@ export default class ExportFlatGeobufActionDefinitionFactory {
         const coordinateTransformer = this._coordinateTransformer;
 
 
-        if (id !== "export-flatgeobuf-action") {
+        if (id !== ID) {
             return;
         }
         return {
-            id: "export-flatgeobuf-action",
+            id: ID,
             type: "button",
             label: i18n.exportActionTitle,
             icon: "icon-doc-export",

@@ -3,7 +3,9 @@
 This bundle adds the support for FlatGeobuf layers to map.apps. It uses the library provided by FlatGeobuf. More
 information: https://github.com/flatgeobuf/flatgeobuf
 
-## Minimal Config
+## Usage
+
+### Use FLATGEOBUF layer
 
 To load a FlatGeobuf as layer the following parameters are required. `id` and `title` can be left out but are strongly
 recommended.
@@ -22,7 +24,7 @@ recommended.
 }
 ```
 
-## Extended Config
+#### Extended Config
 
 This config extends the minimum config with optional optical effects, labels, transparency, a unique value renderer
 highlighting Texas, field information, popups and maptips.
@@ -128,7 +130,7 @@ highlighting Texas, field information, popups and maptips.
 }
 ```
 
-## Explicitly Supported FeatureLayer Properties
+#### Explicitly Supported FeatureLayer Properties
 
 | Property             | Type            | Possible Values                                 | Default | Description                                 |
 |----------------------|-----------------|-------------------------------------------------|---------|---------------------------------------------|
@@ -150,6 +152,32 @@ highlighting Texas, field information, popups and maptips.
 | url                  | `String`        | String containing an URL                        |         | URL of the data source of the layer         |
 | visible              | `Boolean`       | `true` or `false`                               | `true`  | Show/Hide layer                             |
 
-## Known Limitations
+#### Known Limitations
 
 The limitations of the above properties stated in the [ArcGIS API for JavaScript documentation](https://developers.arcgis.com/javascript/latest/api-reference/esri-layers-FeatureLayer.html#properties-summary) apply.
+
+### Use TOC-Action to export .fgb-Files
+
+Configure the available selection methods in the toc bundle. This bundle adds the _export-flatgeobuf_ action.
+
+Use all actions:
+```json
+"toc": {
+    "Config": {
+        "actions": [
+            "*"
+        ]
+    }
+},
+```
+
+Specify which actions should be used:
+```json
+"toc": {
+    "Config": {
+        "actions": [
+            "export-flatgeobuf"
+        ]
+    }
+},
+```
