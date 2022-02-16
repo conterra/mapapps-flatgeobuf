@@ -35,21 +35,27 @@ const queryAllFeaturesFromLayer = (layer) => {
  * Method to convert Esri Features to GeoJSON.
  *
  * @param features
- * @param transformer
+ * @param geojsonTransformer
+ * @param coordinateTransformer
  * @returns {{features: *, type: string}}
  */
-const getGeoJSONFeatureCollection = (features, transformer) => {
-    const geoJSONFeatures = features.map(feature => {
-        const geometry = transformer.geometryToGeojson(feature.geometry);
+const getGeoJSONFeatureCollection = async (features, geojsonTransformer, coordinateTransformer) => {
+    const promises = features.map(feature => new Promise((resolve) => {
+        coordinateTransformer.transform(feature.geometry, 4326).then((transformedGeometry) => {
+            const geometry = geojsonTransformer.geometryToGeojson(transformedGeometry);
+            resolve({
+                "type": "Feature",
+                "geometry": geometry,
+                "properties": feature.attributes
+            });
+        });
+    }));
+    return Promise.all(promises).then((geoJSONFeatures) => {
         return {
-            "type": "Feature",
-            "geometry": geometry
+            "type": "FeatureCollection",
+            "features": geoJSONFeatures
         };
     });
-    return {
-        "type": "FeatureCollection",
-        "features": geoJSONFeatures
-    };
 };
 
 /**
@@ -84,6 +90,7 @@ export default class ExportFlatGeobufActionDefinitionFactory {
         const i18n = this._i18n.get().ui;
         const logService = this._logService;
         const transformer = this._transformer;
+        const coordinateTransformer = this._coordinateTransformer;
 
 
         if (id !== "export-flatgeobuf-action") {
@@ -107,7 +114,8 @@ export default class ExportFlatGeobufActionDefinitionFactory {
                     message: this.startMessage
                 });
                 const features = await queryAllFeaturesFromLayer(tocItem.ref);
-                const geoJSONFeatureCollection = getGeoJSONFeatureCollection(features, transformer);
+                const geoJSONFeatureCollection = await getGeoJSONFeatureCollection(
+                    features, transformer, coordinateTransformer);
                 const flatGeobufBinary = getFlatGeobufBinary(geoJSONFeatureCollection, flatgeobuf.geojson);
                 saveAsFGB(flatGeobufBinary, tocItem.ref?.title || tocItem.ref?.id);
             }
