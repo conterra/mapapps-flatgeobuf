@@ -15,7 +15,6 @@
  */
 
 import * as flatgeobuf from "flatgeobuf";
-import Query from "esri/rest/support/Query";
 
 export default class ExportFlatGeobufActionDefinitionFactory {
 
@@ -51,9 +50,11 @@ export default class ExportFlatGeobufActionDefinitionFactory {
 
                 // access layer and prepare query
                 const layer = tocItem.ref;
-                const query = new Query();
-                query.where = "1=1"; //return all
-                query.returnGeometry = true;
+                const query = {
+                    //return all features
+                    where: "1=1",
+                    returnGeometry: true
+                };
 
                 // query layer and push each feature into an array with added GeoJSON properties
                 const geoJSONArray = [];
