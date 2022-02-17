@@ -14,4 +14,3 @@
 /.vscode/settings.json
 /.externalToolBuilders/
 /package-lock.json
-/src/main/js/bundles/flatgeobuf/

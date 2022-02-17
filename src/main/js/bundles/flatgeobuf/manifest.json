@@ -1,0 +1,25 @@
+{
+    "name": "flatgeobuf",
+    "version": "3.21.3",
+    "author": "Björn Harrtell",
+    "title": "FlatGeobuf",
+    "description": "A performant binary encoding for geographic data",
+    "license": "BSD-3-Clause",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/flatgeobuf/flatgeobuf.git"
+    },
+    "homepage": "https://github.com/flatgeobuf/flatgeobuf#readme",
+    "keywords": [
+        "spatial",
+        "geometry",
+        "feature",
+        "flatbuffers",
+        "serialization",
+        "binary",
+        "performance"
+    ],
+    "main": "index.js",
+    "layer": "",
+    "i18n": []
+}
