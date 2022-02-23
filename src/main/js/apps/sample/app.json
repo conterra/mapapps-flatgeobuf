@@ -57,26 +57,26 @@
                 ],
                 "map": {
                     "layers": [
-                        {
-                            "id": "grenzen",
-                            "type": "FLATGEOBUF",
-                            "url": "resource('${app}:res/world.fgb')",
-                            "title": "Ländergrenzen",
-                            "objectIdField": "objectid",
-                            "displayField": "placename",
-                            "fields": [
-                                {
-                                    "name": "objectid",
-                                    "alias": "objectid",
-                                    "type": "oid"
-                                },
-                                {
-                                    "name": "placename",
-                                    "alias": "placename",
-                                    "type": "string"
-                                }
-                            ]
-                        },
+//                        {
+//                            "id": "grenzen",
+//                            "type": "FLATGEOBUF",
+//                            "url": "resource('${app}:res/world.fgb')",
+//                            "title": "Ländergrenzen",
+//                            "objectIdField": "objectid",
+//                            "displayField": "placename",
+//                            "fields": [
+//                                {
+//                                    "name": "objectid",
+//                                    "alias": "objectid",
+//                                    "type": "oid"
+//                                },
+//                                {
+//                                    "name": "placename",
+//                                    "alias": "placename",
+//                                    "type": "string"
+//                                }
+//                            ]
+//                        },
                         {
                             "id": "flatgeobuf",
                             "type": "FLATGEOBUF",
@@ -84,6 +84,7 @@
                             "title": "Counties",
                             "objectIdField": "FIPS",
                             "displayField": "NAME",
+                            "geometryType": "polygon",
                             "fields": [
                                 {
                                     "name": "FIPS",

@@ -18,11 +18,58 @@ import FeatureLayer from "esri/layers/FeatureLayer";
 
 export default class FlatGeobufLayerTypeFactory {
 
-    async create(layerArguments) {
-        const graphics = [];
+    #fgbUrl = null;
+    #featureLayer = null;
+    #coordinateTransformer = null;
 
-        const response = await fetch(layerArguments.url);
-        for await (const feature of geojson.deserialize(response.body)) {
+    async create(layerArguments) {
+        this.#fgbUrl = layerArguments.url;
+        const properties = Object.assign({}, layerArguments, {
+            source: [], url: null
+        });
+        const layer = this.#featureLayer = new FeatureLayer(properties);
+
+        return {instance: layer};
+    }
+
+    setMapWidgetModel(mapWidgetModel) {
+        if (mapWidgetModel.view) {
+            this.#watchForExtent(mapWidgetModel.view);
+        } else {
+            const watcher = mapWidgetModel.watch("view", ({value: view}) => {
+                watcher.remove();
+                this.#watchForExtent(view);
+            });
+        }
+    }
+
+    setCoordinateTransformer(coordinateTransformer) {
+        this.#coordinateTransformer = coordinateTransformer;
+    }
+
+    #watchForExtent(view) {
+        let timeout = null;
+        view.watch("stationary", (response) => {
+            if (response) {
+                clearTimeout(timeout);
+
+                timeout = setTimeout(() => {
+                    this.#queryData(view.extent);
+                }, 1000);
+            }
+        });
+    }
+
+    async #queryData(extent) {
+        const fgBoundingBox = await this.#getFgBoundingBox(extent);
+        if (!fgBoundingBox) {
+            return;
+        }
+        const graphics = [];
+        const url = this.#fgbUrl;
+        const iter = geojson.deserialize(url, fgBoundingBox, () => {
+        });
+        for await (const feature of iter) {
             const geometry = this._transformer.geojsonToGeometry(feature.geometry);
             const graphic = {
                 geometry: geometry,
@@ -30,23 +77,50 @@ export default class FlatGeobufLayerTypeFactory {
             };
             graphics.push(graphic);
         }
+        const featureLayer = this.#featureLayer;
+        featureLayer.applyEdits({
+            addFeatures: graphics
+        });
+        this.#updateLayerExtent();
+    }
 
-        const properties = Object.assign({}, layerArguments, {source: graphics, url: null});
-        const layer = new FeatureLayer(properties);
+    #getFgBoundingBox(extent) {
+        return new Promise((resolve) => {
+            const coordinateTransformer = this.#coordinateTransformer;
+            if (extent && coordinateTransformer) {
+                coordinateTransformer.transform(extent, 4326).then((transformedExtent) => {
+                    const bbox = {
+                        minX: this.#reduceX(transformedExtent.xmin),
+                        maxX: this.#reduceX(transformedExtent.xmax),
+                        minY: transformedExtent.ymin,
+                        maxY: transformedExtent.ymax
+                    };
+                    resolve(bbox);
+                });
+            } else {
+                resolve();
+            }
+        });
+    }
 
-        // calculate extent
-        if (!layer.extent) {
-            let extent = null;
-            layer.source.toArray().forEach((g) => {
-                if (!extent) {
-                    extent = g.geometry.extent;
-                } else {
-                    extent.union(g.geometry.extent);
-                }
-            });
-            layer.extent = extent;
+    #reduceX(x) {
+        if (x > 180) {
+            return this.#reduceX(x - 360);
+        } else {
+            return x;
         }
+    }
 
-        return {instance: layer};
+    #updateLayerExtent() {
+        const featureLayer = this.#featureLayer;
+        let extent = null;
+        featureLayer.source.toArray().forEach((g) => {
+            if (!extent) {
+                extent = g.geometry.extent;
+            } else {
+                extent.union(g.geometry.extent);
+            }
+        });
+        featureLayer.extent = extent;
     }
 }

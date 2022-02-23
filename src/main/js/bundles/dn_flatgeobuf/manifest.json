@@ -35,6 +35,16 @@
                 {
                     "name": "_exportAction",
                     "providing": "toc.ActionDefinitionFactory"
+                },
+                {
+                    "name": "mapWidgetModel",
+                    "providing": "map-widget.MapWidgetModel",
+                    "cardinality": "0..1"
+                },
+                {
+                    "name": "coordinateTransformer",
+                    "providing": "coordinatetransformer.CoordinateTransformer",
+                    "cardinality": "0..1"
                 }
             ]
         },
