@@ -16,7 +16,7 @@
 import {geojson} from "flatgeobuf";
 import FeatureLayer from "esri/layers/FeatureLayer";
 
-export default class FlatGeobufLayerTypeFactory {
+export default class FlatGeobufFeatureLayerTypeFactory {
 
     #fgbUrl = null;
     #featureLayer = null;

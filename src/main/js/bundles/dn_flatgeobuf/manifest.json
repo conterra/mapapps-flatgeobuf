@@ -18,14 +18,45 @@
     },
     "components": [
         {
-            "name": "FlatGeobufLayerTypeFactory",
+            "name": "FlatGeobufFeatureLayerTypeFactory",
             "immediate": true,
             "provides": [
                 "map-config-api.LayerTypeFactory",
-                "dn_flatgeobuf.FlatGeobufLayerTypeFactory"
+                "dn_flatgeobuf.FlatGeobufFeatureLayerTypeFactory"
             ],
             "properties": {
-                "layerType": "FLATGEOBUF"
+                "layerType": "FLATGEOBUF_FEATURE"
+            },
+            "references": [
+                {
+                    "name": "_transformer",
+                    "providing": "geojson.Transformer"
+                },
+                {
+                    "name": "_exportAction",
+                    "providing": "toc.ActionDefinitionFactory"
+                },
+                {
+                    "name": "mapWidgetModel",
+                    "providing": "map-widget.MapWidgetModel",
+                    "cardinality": "0..1"
+                },
+                {
+                    "name": "coordinateTransformer",
+                    "providing": "coordinatetransformer.CoordinateTransformer",
+                    "cardinality": "0..1"
+                }
+            ]
+        },
+        {
+            "name": "FlatGeobufGeoJSONLayerTypeFactory",
+            "immediate": true,
+            "provides": [
+                "map-config-api.LayerTypeFactory",
+                "dn_flatgeobuf.FlatGeobufGeoJSONLayerTypeFactory"
+            ],
+            "properties": {
+                "layerType": "FLATGEOBUF_GEOJSON"
             },
             "references": [
                 {

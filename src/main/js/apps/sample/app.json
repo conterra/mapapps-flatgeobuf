@@ -79,7 +79,7 @@
 //                        },
                         {
                             "id": "flatgeobuf",
-                            "type": "FLATGEOBUF",
+                            "type": "FLATGEOBUF_GEOJSON",
                             "url": "https://flatgeobuf.org/test/data/UScounties.fgb",
                             "title": "Counties",
                             "objectIdField": "FIPS",
