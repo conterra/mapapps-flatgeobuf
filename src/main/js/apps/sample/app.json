@@ -25,10 +25,18 @@
             "search-ui",
             "locator-store",
             "toc",
-            "dn_flatgeobuf"
+            "dn_flatgeobuf",
+            "agssearch",
+            "selection-ui",
+            "selection-resultcenter"
         ]
     },
     "bundles": {
+        "agssearch": {
+            "AutoStoreRegistration": {
+                "componentEnabled": true
+            }
+        },
         "banner": {
             "BannerWidget": {
                 "label": "Developer Network",
@@ -228,11 +236,7 @@
                         "cssClass": "ct-main-app-menu",
                         "tools": [
                             "tocToggleTool",
-                            "printingToggleTool",
-                            "sharelinkTool",
-                            "helloTool",
-                            "IMPRINT_Imprint_CustomInfoTool",
-                            "IMPRINT_Imprint_CustomInfoTool_mobile"
+                            "*"
                         ],
                         "registerWidget": {
                             "widgetRole": "drawer_button"
